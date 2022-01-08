@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<ui:composition>
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: rgb(0, 127, 144);">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.xhtml">Mujtaba Shafique</a>
+            <button class="navbar-toggler" type="button">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item" >
+                        <h:form style="color: white; display: flex ">
+<!--                            <i class="fas fa-sign-in-alt"></i>-->
+                            <h:commandLink rendered="#{!myBean.isloggedin()}" class="nav-link active" action="login.xhtml?faces-redirect=true" value="Login"/>
+                        </h:form>
+
+                    </li>
+                    <li class="nav-item">
+
+                        <h:form style="color: white; display: flex ">
+<!--                            <i class="fas fa-user-plus"></i>-->
+                            <h:commandLink rendered="#{!myBean.isloggedin()}" class="nav-link active" action="register.xhtml?faces-redirect=true" value="Register"/>
+                        </h:form>
+
+                    </li> <li class="nav-item">
+
+                        <h:form style="color: white; display: flex ">
+<!--                            <i class="fas fa-user-plus"></i>-->
+                            <h:commandLink  class="nav-link active" rendered="#{myBean.isloggedin()}" value="Logout" action="#{myBean.logout}"/>
+                        </h:form>
+
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+</ui:composition>
+</html>

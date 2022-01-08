@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<ui:include src="web_header.xhtml"></ui:include>
+<h:body>
+<ui:include src="navbar.xhtml"></ui:include>
+
+    <div class="container">
+        <h1>Congrats you login successfully...!</h1>
+        <hr></hr>
+        <h1>List of USERS in this system</h1>
+        <h:dataTable value="#{myBean.getPersonList()}" var="usernames" border="4" styleClass="table table-striped table-hover" >
+            <h:column >
+                <f:facet name="header">
+                    id
+                </f:facet>
+                #{usernames.id}
+            </h:column>
+            <h:column >
+                <f:facet  name="header">
+                    Username
+                </f:facet>
+                #{usernames.username}
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">
+                    Firstname
+                </f:facet>
+                #{usernames.firstname}
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">
+                    Lastname
+                </f:facet>
+                #{usernames.lastname}
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">
+                    E-mail
+                </f:facet>
+                #{usernames.email}
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">
+                    Password
+                </f:facet>
+                #{usernames.password}
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">
+                    Birthday
+                </f:facet>
+                #{usernames.birthday}
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    Gender
+                </f:facet>
+                #{usernames.gender}
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Action</f:facet>
+                <h:form>
+                                <h:commandLink value="Delete" action="#{myBean.DeleteUser(usernames)}" /></h:form>
+            </h:column>
+        </h:dataTable>
+
+    </div>
+</h:body>
+</html>

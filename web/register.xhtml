@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <ui:include src="web_header.xhtml"></ui:include>
+    <style type="text/css">
+    body {
+        font-family: 'Baloo Bhai 2';
+        /*background-color: black;*/
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    /* Add padding to containers */
+    .container {
+        padding: 10px;
+        background-color: white;
+    }
+
+    /* Full-width input fields */
+    inputText[type=text],input[type=text] ,input[type=password],input[type=email],input[type=date] {
+        width: 100%;
+        padding: 10px;
+        margin: 5px 0 22px 0;
+        display: inline-block;
+        border: none;
+        background: #f1f1f1;
+    }
+
+    input[type=text]:focus, input[type=password]:focus,input[type=email]:focus{
+        background-color: #ddd;
+        outline: none;
+    }
+
+    /* Overwrite default styles of hr */
+    hr {
+        border: 1px solid #f1f1f1;
+        margin-bottom: 25px;
+    }
+
+    /* Set a style for the submit button */
+    .registerbtn {
+        background-color:  rgb(0, 127, 144);;
+        color: white;
+        padding: 16px 20px;
+        margin: 8px 0;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+        opacity: 0.9;
+    }
+
+    .registerbtn:hover {
+        opacity: 1;
+    }
+
+    /* Add a blue text color to links */
+    a {
+        color: dodgerblue;
+    }
+
+    /* Set a grey background color and center the text of the "sign in" section */
+    .signin {
+        background-color: #f1f1f1;
+        text-align: center;
+    }
+
+</style>
+
+</h:head>
+<h:body>
+    <ui:include src="navbar.xhtml"></ui:include>
+    <h:form action="reg_servlet" method="post">
+        <div class="container myc">
+
+            <!--@declare id="gender"--><h1>Registeration</h1>
+            <p>Please fill in this form to create an account.</p>
+            <hr/>
+            <label for="uname"><b>Username </b></label>
+            <h:inputText type="text" value="#{myBean.user.username}" name="uname" id="uname" required="true" validatorMessage="Enter username between 5-8" >
+                  <f:validateLength maximum="8" minimum="5"/>
+
+            </h:inputText>
+            <h:message for="uname" style="color:red;"/><br/>
+
+            <label for="fname"><b>First Name </b></label>
+            <h:inputText type="text" value="#{myBean.user.firstname}"  name="fname" id="fname" required="true">
+                <f:validateRequired></f:validateRequired>
+            </h:inputText>
+            <h:message for="fname" style="color:red;"/><br/>
+
+            <label for="lname"><b>Last Name</b></label>
+            <h:inputText type="text" value="#{myBean.user.lastname}"  name="lname" id="lname" required="true">
+                <f:validateRequired></f:validateRequired>
+
+            </h:inputText>
+            <h:message for="lname" style="color: red"/><br/>
+
+
+            <label for="email"><b>Email</b></label>
+            <h:inputText name="email" id="email" value="#{myBean.user.email}" validatorMessage="Please enter valid email" type="email" required="true">
+           <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$"/>
+            </h:inputText>
+            <h:message for="email" style="color: red"/><br/>
+
+
+            <label for="psw"><b>Password</b></label>
+            <h:inputText type="password" name="psw" value="#{myBean.user.password}" validatorMessage="Password must be 8 length" id="psw" required="true">
+                <f:validateLength maximum="12" minimum="8"/>
+
+            </h:inputText>
+
+            <label for="psw-repeat"><b>Confirm Password</b></label>
+            <h:inputText type="password" name="psw-repeat" id="psw-repeat">
+
+
+            </h:inputText>
+            <h:message for="psw" style="color: red"/><br/>
+
+
+            <label for="birthday"><b>Birthday:</b></label><br/>
+            <h:inputText type="date" id="birthday" value="#{myBean.user.birthday}"  name="birthday" validatorMessage="PLease enter in dd-mm-yyyy" required="true">
+                <f:validateRegex pattern="\d{1,2}-\d{1,2}-\d{4}"/>
+            </h:inputText><br/>
+            <h:message for="birthday" style="color: red"/><br/>
+
+
+            <h:selectOneRadio id="gender" value="#{myBean.user.gender}">
+                <label><b>Gender</b></label><br/>
+                <f:selectItem  itemValue = "Male" itemLabel = "Male" />
+                <f:selectItem itemValue = "Female" itemLabel = "Female" />
+                <f:validateRequired></f:validateRequired>
+
+            </h:selectOneRadio>
+            <h:message for="gender" style="color: red"></h:message>
+
+
+
+<!--            <input type="radio" name="gender"  value="#{myBean.user.gender}" /> Male-->
+<!--            <input type="radio" name="gender" value="#{myBean.user.gender}" /> Female<br/>-->
+            <hr/>
+            <!--            <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>-->
+            <h:commandButton type="submit" class="registerbtn" value="Register" action="${myBean.registerUser()}"></h:commandButton>
+
+            <button type="reset" class="registerbtn btn-danger" style="Background-color:red">Cancel</button>
+        </div>
+
+        <div class="container signin">
+            <p>Already have an account? <a href="login.xhtml">Sign in</a>.</p>
+        </div>
+    </h:form>
+
+
+</h:body>
+</html>
